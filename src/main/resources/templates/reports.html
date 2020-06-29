@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reports</title>
+</head>
+<style>
+    table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+    }
+</style>
+<body>
+<h1>Reports</h1>
+
+<a href="/" style="color: red; position: relative; left:95%;  bottom: 50px">Home</a>
+
+<form action="/reports/getReport" method="GET">
+    <label for="report"></label>
+    <select name="report" id="report">
+        <option th:each="report : ${reports}" th:value="${report}" th:text="${report}"></option>
+    </select>
+    <input type="submit" value="get"/>
+</form>
+
+<div th:if="${result}">
+    <h2>Report</h2>
+    <table style="font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;">
+        <thead>
+        <tr>
+            <th>Performance</th>
+            <th>Seat</th>
+            <th>Customer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="booking : ${result}">
+            <td th:text="${booking.performance.title}"></td>
+            <td th:text="${booking.seat}"></td>
+            <td th:text="${booking.customerName}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

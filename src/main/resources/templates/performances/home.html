@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Performances</title>
+</head>
+<body>
+    <h1>All performances</h1>
+
+    <a href="/" style="color: red; position: relative; left:95%;  bottom: 50px">Home</a>
+
+    <table>
+        <tr><th>ID</th><th>Title</th></tr>
+        <tr th:each="performance : ${performances}">
+            <td th:text="${performance.id}">id</td>
+            <td th:text="${performance.title}">title</td>
+        </tr>
+    </table>
+
+    <a href="/performances/add">Add a performance</a>
+</body>
+</html>

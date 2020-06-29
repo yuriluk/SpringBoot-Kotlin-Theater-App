@@ -1,0 +1,21 @@
+Spring Boot Kotlin Web app:
+
+It is basic learning project. There were used reflection( see  ReportsController)
+
+Tools used.
+Spring Boot.
+Kotlin 1.3.72
+JDK version: 8.
+JPA Repository.
+Build tool: Apache Maven 3.6+.
+Web server: Apache Tomcat.
+Thymeleaf
+Application container: Spring IoC. Spring Framework +.
+Spring configured via Java config.
+Database: H2
+
+Steps to set-up:
+1. Fill H2 with Seats - use menu bullet #1
+2. Add performances - use menu bullet #2
+
+If you need a report - use menu bullet #3

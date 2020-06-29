@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Theater Booking</title>
+</head>
+<body>
+<h1>Theater Booking</h1>
+<h2>Seat availability</h2>
+
+<form action="/checkAvailability" th:object="${bean}" method="POST">
+    <p>Check if seat number
+        <label>
+            <select th:field="*{selectedSeatNum}">
+                <option th:each="n : ${seatNums}" th:value="${n}" th:text="${n}"/>
+            </select>
+        </label>
+        <label>
+            in row
+            <select th:field="*{selectedSeatRow}">
+                <option th:each="r : ${seatRows}" th:value="${r}" th:text="${r}"/>
+            </select>
+        </label>
+        is available for performance
+        <label>
+            <select th:field="*{selectedPerformance}">
+                <option th:each="p : ${performances}" th:value="${p.id}" th:text="${p.title}"/>
+            </select>
+        </label>
+
+        <input type="submit"/></p>
+
+</form>
+
+<div th:if="${bean.available}">
+    Seat <span th:text="${bean.seat}">seatNumber</span> is available for this performance - do you want to book it?
+
+    <form action="/booking" method="POST" th:object="${bean}">
+        <input type="hidden" id="sid" name="sid" th:value="*{seat.id}"/>
+        <input type="hidden" id="pid" name="pid" th:value="*{performance.id}"/>
+        Customer Name:
+        <label>
+            <input type="text" th:field="*{customerName}"/>
+        </label>
+        <input type="submit" value="Book now"/>
+    </form>
+</div>
+
+<p th:if="${bean.available == false}">
+    I'm sorry - this seat is already booked for this performance.
+    The customer is <a><span th:text="${bean.booking.customerName}"></span></a>
+</p>
+
+
+<div style="position: relative; left:70%;  bottom: 130px">
+    <h2>Theater Services</h2>
+    <ul>
+        <li>
+            <a href="/bootstrap">Fill db with seats for this Theater(only once, during first setup</a>
+        </li>
+        <li>
+            <a href="/performances/">Manage performances</a>
+        </li>
+        <li>
+            <a href="/reports">Booking reports</a>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
